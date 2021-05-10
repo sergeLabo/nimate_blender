@@ -389,8 +389,7 @@ class NImateReceiver():
             if self.quit_port >= 0:
                 try:
                     quit_sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
-                    msg = b'/NI mate\x00\x00\x00\x00,s\x00\x00quit\x00\x00\x00\x00',
-                            ("127.0.0.1", self.quit_port)
+                    msg = b'/NI mate\x00\x00\x00\x00,s\x00\x00quit\x00\x00\x00\x00', ("127.0.0.1", self.quit_port)
                     quit_sock.sendto(msg)
 
                     print("Quitting NI mate")
@@ -576,7 +575,7 @@ if not GE:
         bl_idname = "wm.delicode_ni_mate_feed_logic_create"
         bl_label = "Create game logic"
         bl_description = (f'Create or update game logic to replace an image with '
-                          f'NI mate live feed for the selected object')'
+                          f'NI mate live feed for the selected object')
         bl_options = {'REGISTER'}
 
         @classmethod
@@ -826,7 +825,7 @@ if not GE:
 
         scene.delicode_ni_mate_GE_quit_port = bpy.props.IntProperty(
             name = "Quit Port",
-            description = f"NI mate will receive the quit OSC message on this port,'
+            description = f"NI mate will receive the quit OSC message on this port,"
                             f"idem the OSC input port in NI mate preferences!",
             default = 7000,
                         min = 0,
@@ -976,7 +975,8 @@ def updateFeed(controller):
         bge.logic.DelicodeNImateFeeds = {}
 
     # Delicode: DO YOU KNOW PEP8 ?
-    if (str(sensor_num*2 + feed_2) not in bge.logic.DelicodeNImateFeeds.keys()) or (bge.logic.DelicodeNImateFeeds[str(sensor_num*2 + feed_2)] == None):
+    if (str(sensor_num*2 + feed_2) not in bge.logic.DelicodeNImateFeeds.keys()) or\
+            (bge.logic.DelicodeNImateFeeds[str(sensor_num*2 + feed_2)] == None):
         bge.logic.DelicodeNImateFeeds[str(sensor_num*2 + feed_2)] = setupFeed(own)
     else:
         bge.logic.DelicodeNImateFeeds[str(sensor_num*2 + feed_2)].run()
